@@ -10,7 +10,7 @@ import { API_KEY } from "../apiKey";
 export const weatherApi = createApi({
   reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://dataservice.accuweather.com/",
+    baseUrl: "https://dataservice.accuweather.com/",
   }),
   endpoints: (builder) => ({
     getCurrentConditions: builder.query<CurrentCondition[], string>({
@@ -23,11 +23,11 @@ export const weatherApi = createApi({
     }),
     get24HoursForecast: builder.query<HourlyForecast[], string>({
       query: (locationKey: string) =>
-        `http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=${API_KEY}`,
+        `https://dataservice.accuweather.com/forecasts/v1/hourly/12hour/${locationKey}?apikey=${API_KEY}`,
     }),
     getCityLocationKeyBySearchTerm: builder.query<Location[], string>({
       query: (searchTerm: string) =>
-        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchTerm}`,
+        `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${API_KEY}&q=${searchTerm}`,
     }),
   }),
 });
