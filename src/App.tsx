@@ -7,7 +7,7 @@ import WeatherForecast from "./features/WeatherForecast/WeatherForecats";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/weather-app-react">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home />} />
