@@ -1,4 +1,6 @@
-const initialState = {
+import { SelectedLocationState } from "../types/selectedLocationState";
+
+const initialState: SelectedLocationState = {
   selectedLocation: "",
   selectedLoacationKey: "",
 };
