@@ -49,7 +49,11 @@ const WeatherForecast: React.FC = () => {
     <div>
       {currentConditions && (
         <div
-          style={{ height: "30vh", display: "flex", flexDirection: "column" }}
+          style={{
+            minHeight: "30vh",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <h1>{selectedLocation && selectedLocation}</h1>
           <h2>

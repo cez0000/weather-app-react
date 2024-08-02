@@ -23,7 +23,8 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
   return (
     <div
       style={{
-        margin: "0 10px",
+        width: "20%",
+        minWidth: "100px",
       }}
     >
       <div
@@ -32,8 +33,10 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          width: "220px",
+          width: "92%",
           height: "150px",
+          marginLeft: "auto",
+          marginRight: "auto",
           marginBottom: "10px",
           padding: "15px",
           borderRadius: "10px",
