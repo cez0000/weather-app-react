@@ -4,32 +4,52 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "i18next";
+import useSelectedLanguage from "../hooks/useSelectedLanguage";
 const Header: React.FC = () => {
+  const { t } = useTranslation();
+  const { selectedLanguage } = useSelectedLanguage();
+
+  const getLanguageLongName = (shortName: string): string => {
+    switch (shortName) {
+      case "pl":
+        return "Polski";
+      case "en":
+        return "English";
+      case "ru":
+        return "Pусский";
+      default:
+        return "";
+    }
+  };
   return (
     <Navbar style={{ width: "100%", backgroundColor: "#d8d8d8" }} expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Weather-App</Navbar.Brand>
+        <Navbar.Brand href="#home">{t("Weather-App")}</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav>
             <Nav.Link as={Link} to="/">
-              Home
+              {t("Home")}
             </Nav.Link>
             <Nav.Link as={Link} to="/About">
-              About
+              {t("About")}
             </Nav.Link>
           </Nav>
           <Nav style={{ marginLeft: "auto" }}>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+            <NavDropdown
+              title={getLanguageLongName(selectedLanguage)}
+              id="basic-nav-dropdown"
+            >
+              <NavDropdown.Item onClick={() => changeLanguage("en")}>
+                English
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item onClick={() => changeLanguage("pl")}>
+                Polski
+              </NavDropdown.Item>
+              <NavDropdown.Item onClick={() => changeLanguage("ru")}>
+                Pусский
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

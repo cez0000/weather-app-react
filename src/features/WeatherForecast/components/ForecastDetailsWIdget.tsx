@@ -3,6 +3,7 @@ import { ForecastDay, HourlyForecast } from "../../../types/weatherTypes";
 import { fahrenheitToCelscius } from "../../../utils/fahrenheitToCelscius";
 import { weatherIcon } from "../../../utils/weatherIcon";
 import { getForecastHour } from "../../../utils/forecastHour";
+import { useTranslation } from "react-i18next";
 interface ForecastDetailsWidgetProps {
   forecastDay?: ForecastDay;
   forecastHour?: HourlyForecast;
@@ -15,6 +16,7 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
   openDetails,
   isDayMode,
 }) => {
+  const { t } = useTranslation();
   useEffect(() => {
     if (forecastHour)
       console.log(new Date(forecastHour.DateTime.slice(0, 19)).getHours());
@@ -47,16 +49,21 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
         {forecastDay && (
           <>
             <div>{forecastDay.Date.slice(0, 10)}</div>
-            <div>
+            <div style={{ height: "33%" }}>
               <img
-                style={{ width: "20%" }}
-                src={weatherIcon(forecastDay.Day.IconPhrase, isDayMode)}
+                style={{ height: "90%" }}
+                src={weatherIcon(
+                  isDayMode
+                    ? forecastDay.Day.IconPhrase
+                    : forecastDay.Night.IconPhrase,
+                  isDayMode
+                )}
               />
             </div>
             <div>
               {isDayMode
-                ? forecastDay.Day.IconPhrase
-                : forecastDay.Night.IconPhrase}
+                ? t(forecastDay.Day.IconPhrase.toLocaleLowerCase())
+                : t(forecastDay.Night.IconPhrase.toLocaleLowerCase())}
             </div>
             <div>
               {fahrenheitToCelscius(
@@ -71,9 +78,9 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
         {forecastHour && (
           <>
             <div>{forecastHour.DateTime.slice(5, 16).replace("T", " ")}</div>
-            <div>
+            <div style={{ height: "33%" }}>
               <img
-                style={{ width: "20%" }}
+                style={{ height: "90%" }}
                 src={weatherIcon(
                   forecastHour.IconPhrase,
                   getForecastHour(forecastHour.DateTime) < 21 &&
@@ -81,7 +88,7 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
                 )}
               />
             </div>
-            <div>{forecastHour.IconPhrase}</div>
+            <div>{t(forecastHour.IconPhrase.toLocaleLowerCase())}</div>
             <div>
               {fahrenheitToCelscius(forecastHour.Temperature.Value).toFixed(0)}{" "}
               °C

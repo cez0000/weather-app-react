@@ -11,8 +11,10 @@ import ForecastDetailsWidget from "./components/ForecastDetailsWIdget";
 import { PeriodEnum } from "../../enums/periodEnum";
 import { weatherIcon } from "../../utils/weatherIcon";
 import ForecastDetailsModal from "./components/ForecastDetailsModal";
+import { useTranslation } from "react-i18next";
 
 const WeatherForecast: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedPeriod, setSelectedPeriod] = useState<PeriodEnum>(
     PeriodEnum.hourly
   );
@@ -57,7 +59,8 @@ const WeatherForecast: React.FC = () => {
         >
           <h1>{selectedLocation && selectedLocation}</h1>
           <h2>
-            Temperature now: {currentConditions[0].Temperature.Metric.Value}°C
+            {t("Temperature now")}:{" "}
+            {currentConditions[0].Temperature.Metric.Value}°C
           </h2>
           <div>
             <img
@@ -66,11 +69,11 @@ const WeatherForecast: React.FC = () => {
             />
           </div>
           <div style={{ fontWeight: "bold" }}>
-            {currentConditions[0].WeatherText}
+            {t(currentConditions[0].WeatherText.toLocaleLowerCase())}
           </div>
           <div style={{ marginBottom: "1rem" }}>
             <label style={{ fontWeight: "bold" }} htmlFor="time-period">
-              Select Time Period:{" "}
+              {t("Select Time Period")}:{" "}
             </label>
             <select
               style={{
@@ -84,8 +87,8 @@ const WeatherForecast: React.FC = () => {
               value={selectedPeriod}
               onChange={handleChange}
             >
-              <option value={PeriodEnum.hourly}>12 hour</option>
-              <option value={PeriodEnum.daily}>5 day</option>
+              <option value={PeriodEnum.hourly}>12 {t("hours")}</option>
+              <option value={PeriodEnum.daily}>5 {t("days")}</option>
             </select>
           </div>
         </div>
@@ -121,7 +124,9 @@ const WeatherForecast: React.FC = () => {
       {selectedPeriod === PeriodEnum.daily && (
         <>
           <div style={{ fontWeight: "bold", marginBottom: "10px" }}>
-            <div style={{ marginBottom: "5px" }}>Show Night Forecast</div>
+            <div style={{ marginBottom: "5px" }}>
+              {t("Show Night Forecast")}
+            </div>
             <ReactSwitch
               checked={!isDayMode}
               onChange={() => setIsDayMode(!isDayMode)}

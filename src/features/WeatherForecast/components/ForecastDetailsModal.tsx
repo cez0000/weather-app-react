@@ -3,6 +3,7 @@ import { ForecastDay, HourlyForecast } from "../../../types/weatherTypes";
 import { fahrenheitToCelscius } from "../../../utils/fahrenheitToCelscius";
 import { weatherIcon } from "../../../utils/weatherIcon";
 import { getForecastHour } from "../../../utils/forecastHour";
+import { useTranslation } from "react-i18next";
 
 interface ForecastDetailsProps {
   forecastDay?: ForecastDay;
@@ -16,6 +17,7 @@ const ForecastDetailsModal: React.FC<ForecastDetailsProps> = ({
   onClose,
   isDayMode,
 }) => {
+  const { t } = useTranslation();
   const forecastUnitToCheck = (forecastDayBase: ForecastDay) => {
     return isDayMode ? forecastDayBase.Day : forecastDayBase.Night;
   };
@@ -28,16 +30,16 @@ const ForecastDetailsModal: React.FC<ForecastDetailsProps> = ({
         {forecastDay && (
           <>
             <div>{forecastDay.Date.slice(0, 10)}</div>
-            <div>
+            <div style={{ margin: "10px 0" }}>
               <img
-                style={{ width: "20%" }}
+                style={{ height: "100px" }}
                 src={weatherIcon(forecastDay.Day.IconPhrase, isDayMode)}
               />
             </div>
             <div>
               {isDayMode
-                ? forecastDay.Day.IconPhrase
-                : forecastDay.Night.IconPhrase}
+                ? t(forecastDay.Day.IconPhrase.toLocaleLowerCase())
+                : t(forecastDay.Night.IconPhrase.toLocaleLowerCase())}
             </div>
             <div>
               {fahrenheitToCelscius(
@@ -49,19 +51,26 @@ const ForecastDetailsModal: React.FC<ForecastDetailsProps> = ({
             </div>
 
             <div>
-              Percipitation:{" "}
-              {forecastUnitToCheck(forecastDay).HasPrecipitation ? "Yes" : "No"}
+              {t("Percipitation")}:{" "}
+              {forecastUnitToCheck(forecastDay).HasPrecipitation
+                ? t("Yes")
+                : t("No")}
             </div>
             {forecastUnitToCheck(forecastDay).PrecipitationType && (
               <div>
-                Percipitation Type:{" "}
-                {forecastUnitToCheck(forecastDay).PrecipitationType}
+                {t("Percipitation Type")}:{" "}
+                {t(
+                  forecastUnitToCheck(forecastDay).PrecipitationType as string
+                )}
               </div>
             )}
             {forecastUnitToCheck(forecastDay).PrecipitationIntensity && (
               <div>
-                Percipitation Type:{" "}
-                {forecastUnitToCheck(forecastDay).PrecipitationIntensity}
+                {t("Percipitation Intensity")}:{" "}
+                {t(
+                  forecastUnitToCheck(forecastDay)
+                    .PrecipitationIntensity as string
+                )}
               </div>
             )}
           </>
@@ -69,9 +78,9 @@ const ForecastDetailsModal: React.FC<ForecastDetailsProps> = ({
         {forecastHour && (
           <>
             <div>{forecastHour.DateTime.slice(5, 16).replace("T", " ")}</div>
-            <div>
+            <div style={{ margin: "10px 0" }}>
               <img
-                style={{ width: "20%" }}
+                style={{ height: "100px" }}
                 src={weatherIcon(
                   forecastHour.IconPhrase,
                   getForecastHour(forecastHour.DateTime) < 21 &&
@@ -79,14 +88,14 @@ const ForecastDetailsModal: React.FC<ForecastDetailsProps> = ({
                 )}
               />
             </div>
-            <div>{forecastHour.IconPhrase}</div>
+            <div>{t(forecastHour.IconPhrase.toLocaleLowerCase())}</div>
             <div>
               {fahrenheitToCelscius(forecastHour.Temperature.Value).toFixed(0)}{" "}
               °C
             </div>
             <div>
-              Percipitation probability: {forecastHour.PrecipitationProbability}{" "}
-              %
+              {t("Percipitation probability")}:{" "}
+              {forecastHour.PrecipitationProbability} %
             </div>
           </>
         )}

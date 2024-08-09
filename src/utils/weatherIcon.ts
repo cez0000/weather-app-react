@@ -6,14 +6,16 @@ import thunderStorm from "../assets/poo-storm-solid.svg";
 import sunStorm from "../assets/sun-with-storm.svg";
 import moonIcon from "../assets/moon-solid.svg";
 import cloudMoon from "../assets/cloud-moon-solid.svg";
-import moonStorm from "../assets/cloud-moon-solid.svg";
+import moonStorm from "../assets/cloud-stoorm.svg";
 
 export const weatherIcon = (description: string, isDayMode: boolean = true) => {
   if (isDayMode) {
     switch (description.toLocaleLowerCase()) {
       case "intermittent clouds":
       case "mostly cloudy":
+      case "partly cloudy":
       case "partly sunny":
+      case "partly sunny w/ showers":
         return sunCloudIcon;
       case "cloudy":
         return cloudIcon;
@@ -22,6 +24,7 @@ export const weatherIcon = (description: string, isDayMode: boolean = true) => {
         return sunIcon;
       case "showers":
       case "rain":
+      case "mostly cloudy w/ showers":
         return cloudRain;
       case "thunderstorms":
       case "mostly cloudy w/ t-storms":
@@ -36,6 +39,8 @@ export const weatherIcon = (description: string, isDayMode: boolean = true) => {
       case "intermittent clouds":
       case "mostly cloudy":
       case "partly clear":
+      case "partly cloudy":
+      case "partly clear w/ showers":
         return cloudMoon;
       case "cloudy":
         return cloudIcon;
@@ -44,6 +49,7 @@ export const weatherIcon = (description: string, isDayMode: boolean = true) => {
         return moonIcon;
       case "showers":
       case "rain":
+      case "mostly cloudy w/ showers":
         return cloudRain;
       case "thunderstorms":
       case "mostly cloudy w/ t-storms":

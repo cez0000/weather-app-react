@@ -7,8 +7,10 @@ import { useLazyGetCityLocationKeyBySearchTermQuery } from "../../apiServices/we
 import { Location } from "../../types/weatherTypes";
 import { useNavigate } from "react-router-dom";
 import { setSelectedLocationKey } from "../../actions/setSelectedLocationKey";
+import { useTranslation } from "react-i18next";
 
 const Home: React.FC = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,14 +44,14 @@ const Home: React.FC = () => {
         height: "80vh",
       }}
     >
-      <h1 style={{ marginTop: "100px" }}>Welcome to the weather app!</h1>
-      <h2>Search for your location for weather details</h2>
+      <h1 style={{ marginTop: "100px" }}>{t("Welcome to the weather app!")}</h1>
+      <h2>{t("Search for your location for weather details")}</h2>
       <Searchbar
         exportSerachTerm={(searchTerm) => setSearchTerm(searchTerm)}
         searchTerm={searchTerm}
       />
       <div style={{ marginTop: "10px" }}>
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <p>{t("Loading...")}</p>}
         {/* {error && <p>Error: {error}</p>} */}
         {searchResults && (
           <ul
@@ -73,7 +75,7 @@ const Home: React.FC = () => {
         )}
       </div>
       <div>
-        <Button onClick={handleSearch}>Search</Button>
+        <Button onClick={handleSearch}>{t("Search")}</Button>
       </div>
     </div>
   );
