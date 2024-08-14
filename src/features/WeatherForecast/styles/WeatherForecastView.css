@@ -1,0 +1,54 @@
+.weather-forecast-container {
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-forecast-location {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.weather-forecast-temperature {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.weather-forecast-icon {
+  width: 5%;
+}
+
+.weather-forecast-condition {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.weather-forecast-period {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.weather-forecast-period select {
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.weather-forecast-details {
+  display: flex;
+  justify-content: start;
+  width: 90%;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.weather-forecast-day-mode-toggle {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.weather-forecast-day-mode-toggle label {
+  margin-bottom: 5px;
+}
