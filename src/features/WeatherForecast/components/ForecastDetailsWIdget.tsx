@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ForecastDay, HourlyForecast } from "../../../types/weatherTypes";
 import { fahrenheitToCelscius } from "../../../utils/fahrenheitToCelscius";
 import { weatherIcon } from "../../../utils/weatherIcon";
@@ -17,10 +17,6 @@ const ForecastDetailsWidget: React.FC<ForecastDetailsWidgetProps> = ({
   isDayMode,
 }) => {
   const { t } = useTranslation();
-  useEffect(() => {
-    if (forecastHour)
-      console.log(new Date(forecastHour.DateTime.slice(0, 19)).getHours());
-  }, []);
 
   return (
     <div

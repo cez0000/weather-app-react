@@ -5,7 +5,8 @@ import {
   HourlyForecast,
   Location,
 } from "../types/weatherTypes";
-import { API_KEY } from "../apiKey";
+
+const API_KEY = import.meta.env.VITE_API_KEY;
 
 export const weatherApi = createApi({
   reducerPath: "weatherApi",
